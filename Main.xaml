@@ -1,6 +1,6 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="Main" mva:VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="1290,1282" sap2010:WorkflowViewState.IdRef="ActivityBuilder_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="Main" mva:VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="1274,2061" sap2010:WorkflowViewState.IdRef="ActivityBuilder_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <TextExpression.NamespacesForImplementation>
-    <scg:List x:TypeArguments="x:String" Capacity="22">
+    <scg:List x:TypeArguments="x:String" Capacity="44">
       <x:String>System.Activities</x:String>
       <x:String>System.Activities.Statements</x:String>
       <x:String>System.Activities.Expressions</x:String>
@@ -23,10 +23,11 @@
       <x:String>UiPath.Core.Activities</x:String>
       <x:String>System.Windows.Markup</x:String>
       <x:String>System.Xml.Serialization</x:String>
+      <x:String>UiPath.Excel</x:String>
     </scg:List>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
-    <scg:List x:TypeArguments="AssemblyReference" Capacity="15">
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="32">
       <AssemblyReference>System.Activities</AssemblyReference>
       <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
       <AssemblyReference>mscorlib</AssemblyReference>
@@ -42,37 +43,50 @@
       <AssemblyReference>System.Xaml</AssemblyReference>
       <AssemblyReference>UiPath.System.Activities</AssemblyReference>
       <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="Main" sap:VirtualizedContainerService.HintSize="476,1502" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <sap:WorkflowViewStateService.ViewState>
+    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+      <x:Boolean x:Key="ShouldCollapseAll">False</x:Boolean>
+      <x:Boolean x:Key="ShouldExpandAll">True</x:Boolean>
+    </scg:Dictionary>
+  </sap:WorkflowViewStateService.ViewState>
+  <Sequence DisplayName="Main" sap:VirtualizedContainerService.HintSize="544,1996" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="varSearch" />
       <Variable x:TypeArguments="sd:DataTable" Name="ExtractDataTable" />
       <Variable x:TypeArguments="sd:DataTable" Name="sortedDataTable" />
+      <Variable x:TypeArguments="x:String" Name="strDataTable" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:InputDialog Options="{x:Null}" DisplayName="Ask for city: " sap:VirtualizedContainerService.HintSize="434,92" sap2010:WorkflowViewState.IdRef="InputDialog_1" IsPassword="False" Label="Scrape property listings of:" Title="Location">
+    <ui:InputDialog Options="{x:Null}" DisplayName="Ask for city: " sap:VirtualizedContainerService.HintSize="502,92" sap2010:WorkflowViewState.IdRef="InputDialog_1" IsPassword="False" Label="Scrape property listings of:" Title="Location">
       <ui:InputDialog.Result>
         <OutArgument x:TypeArguments="x:String">[varSearch]</OutArgument>
       </ui:InputDialog.Result>
     </ui:InputDialog>
-    <ui:OpenBrowser CommunicationMethod="{x:Null}" Hidden="{x:Null}" Private="{x:Null}" UiBrowser="{x:Null}" BrowserType="Chrome" DisplayName="Open Property 24" sap:VirtualizedContainerService.HintSize="434,993" sap2010:WorkflowViewState.IdRef="OpenBrowser_1" NewSession="True" Url="https://property24.com">
+    <ui:OpenBrowser CommunicationMethod="{x:Null}" Hidden="{x:Null}" Private="{x:Null}" UiBrowser="{x:Null}" BrowserType="Chrome" DisplayName="Open Property 24" sap:VirtualizedContainerService.HintSize="434,167" sap2010:WorkflowViewState.IdRef="OpenBrowser_1" NewSession="True" Url="https://property24.com">
       <ui:OpenBrowser.Body>
         <ActivityAction x:TypeArguments="x:Object">
           <ActivityAction.Argument>
             <DelegateInArgument x:TypeArguments="x:Object" Name="ContextTarget" />
           </ActivityAction.Argument>
-          <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="376,894" sap2010:WorkflowViewState.IdRef="Sequence_2">
+          <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="476,2416" sap2010:WorkflowViewState.IdRef="Sequence_2">
+            <Sequence.Variables>
+              <Variable x:TypeArguments="sd:DataTable" Name="builtDataTable" />
+            </Sequence.Variables>
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-            <Delay mva:VisualBasic.Settings="{x:Null}" DisplayName="Delay 1 second" Duration="00:00:01" sap:VirtualizedContainerService.HintSize="334,22" sap2010:WorkflowViewState.IdRef="Delay_1">
+            <ui:MaximizeWindow Window="{x:Null}" DisplayName="Maximize Window" sap:VirtualizedContainerService.HintSize="434,22" sap2010:WorkflowViewState.IdRef="MaximizeWindow_1" />
+            <Delay mva:VisualBasic.Settings="{x:Null}" DisplayName="Delay 1 second" Duration="00:00:01" sap:VirtualizedContainerService.HintSize="434,22" sap2010:WorkflowViewState.IdRef="Delay_1">
               <TextExpression.Namespaces>
                 <sco:Collection x:TypeArguments="x:String">
                   <x:String>System.Activities</x:String>
@@ -118,7 +132,7 @@
                 </sap2010:ViewStateManager>
               </sap2010:WorkflowViewState.ViewStateManager>
             </Delay>
-            <ui:TypeInto AlterIfDisabled="{x:Null}" ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" EmptyField="{x:Null}" SendWindowMessages="{x:Null}" SimulateType="{x:Null}" Activate="True" DisplayName="Type City" sap:VirtualizedContainerService.HintSize="334,134" sap2010:WorkflowViewState.IdRef="TypeInto_1" Text="[varSearch]">
+            <ui:TypeInto AlterIfDisabled="{x:Null}" ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" EmptyField="{x:Null}" SendWindowMessages="{x:Null}" SimulateType="{x:Null}" Activate="True" DisplayName="Type City" sap:VirtualizedContainerService.HintSize="434,134" sap2010:WorkflowViewState.IdRef="TypeInto_1" Text="[varSearch]">
               <ui:TypeInto.Target>
                 <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="fca08badfabb63431ad696c9ce8f0e93" Selector="&lt;webctrl parentid='SearchBox' tag='UL' /&gt;">
                   <ui:Target.TimeoutMS>
@@ -130,7 +144,7 @@
                 </ui:Target>
               </ui:TypeInto.Target>
             </ui:TypeInto>
-            <ui:SendHotkey ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" EmptyField="{x:Null}" SendWindowMessages="{x:Null}" Activate="True" DisplayName="Send Hotkey: Enter" sap:VirtualizedContainerService.HintSize="334,117" sap2010:WorkflowViewState.IdRef="SendHotkey_1" Key="enter" KeyModifiers="None" SpecialKey="True">
+            <ui:SendHotkey ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" EmptyField="{x:Null}" SendWindowMessages="{x:Null}" Activate="True" DisplayName="Send Hotkey: Enter" sap:VirtualizedContainerService.HintSize="434,117" sap2010:WorkflowViewState.IdRef="SendHotkey_1" Key="enter" KeyModifiers="None" SpecialKey="True">
               <ui:SendHotkey.Target>
                 <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Selector="{x:Null}">
                   <ui:Target.TimeoutMS>
@@ -142,7 +156,7 @@
                 </ui:Target>
               </ui:SendHotkey.Target>
             </ui:SendHotkey>
-            <ui:Click AlterIfDisabled="{x:Null}" DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateClick="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click Property Type" sap:VirtualizedContainerService.HintSize="334,106" sap2010:WorkflowViewState.IdRef="Click_1" KeyModifiers="None" MouseButton="BTN_LEFT">
+            <ui:Click AlterIfDisabled="{x:Null}" DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateClick="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click Property Type" sap:VirtualizedContainerService.HintSize="434,106" sap2010:WorkflowViewState.IdRef="Click_1" KeyModifiers="None" MouseButton="BTN_LEFT">
               <ui:Click.CursorPosition>
                 <ui:CursorPosition Position="Center">
                   <ui:CursorPosition.OffsetX>
@@ -164,7 +178,7 @@
                 </ui:Target>
               </ui:Click.Target>
             </ui:Click>
-            <ui:Click AlterIfDisabled="{x:Null}" DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateClick="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click Townhouse" sap:VirtualizedContainerService.HintSize="334,106" sap2010:WorkflowViewState.IdRef="Click_2" KeyModifiers="None" MouseButton="BTN_LEFT">
+            <ui:Click AlterIfDisabled="{x:Null}" DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateClick="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click Townhouse" sap:VirtualizedContainerService.HintSize="434,106" sap2010:WorkflowViewState.IdRef="Click_2" KeyModifiers="None" MouseButton="BTN_LEFT">
               <ui:Click.CursorPosition>
                 <ui:CursorPosition Position="Center">
                   <ui:CursorPosition.OffsetX>
@@ -186,7 +200,7 @@
                 </ui:Target>
               </ui:Click.Target>
             </ui:Click>
-            <ui:SendHotkey ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" EmptyField="{x:Null}" SendWindowMessages="{x:Null}" Activate="True" DisplayName="Send Hotkey: Enter " sap:VirtualizedContainerService.HintSize="334,117" sap2010:WorkflowViewState.IdRef="SendHotkey_2" Key="enter" KeyModifiers="None" SpecialKey="True">
+            <ui:SendHotkey ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" EmptyField="{x:Null}" SendWindowMessages="{x:Null}" Activate="True" DisplayName="Send Hotkey: Enter " sap:VirtualizedContainerService.HintSize="434,117" sap2010:WorkflowViewState.IdRef="SendHotkey_2" Key="enter" KeyModifiers="None" SpecialKey="True">
               <ui:SendHotkey.Target>
                 <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Selector="{x:Null}">
                   <ui:Target.TimeoutMS>
@@ -198,20 +212,86 @@
                 </ui:Target>
               </ui:SendHotkey.Target>
             </ui:SendHotkey>
+            <ui:ExtractData DelayBetweenPagesMS="{x:Null}" NextLinkSelector="{x:Null}" ContinueOnError="True" DataTable="[ExtractDataTable]" DisplayName="Extract Real Estate Listings" ExtractMetadata="&lt;extract&gt;&lt;row exact='1'&gt;&lt;webctrl tag='div' class='p24_theme' idx='1'/&gt;&lt;webctrl tag='div' class='p24_results' idx='1'/&gt;&lt;webctrl tag='div' class='container' idx='1'/&gt;&lt;webctrl tag='div' class='row' idx='1'/&gt;&lt;webctrl tag='div' class='col-xs-9' idx='1'/&gt;&lt;webctrl tag='div' class='js_listingResultsContainer' idx='1'/&gt;&lt;webctrl tag='div'/&gt;&lt;webctrl tag='div' class='p24_regularTile js_rollover_container ' idx='1'/&gt;&lt;webctrl tag='a'/&gt;&lt;webctrl tag='span' class='p24_content' idx='1'/&gt;&lt;/row&gt;&lt;column exact='1' name='Price' attr='text'&gt;&lt;webctrl tag='div' class='p24_theme' idx='1'/&gt;&lt;webctrl tag='div' class='p24_results' idx='1'/&gt;&lt;webctrl tag='div' class='container' idx='1'/&gt;&lt;webctrl tag='div' class='row' idx='1'/&gt;&lt;webctrl tag='div' class='col-xs-9' idx='1'/&gt;&lt;webctrl tag='div' class='js_listingResultsContainer' idx='1'/&gt;&lt;webctrl tag='div'/&gt;&lt;webctrl tag='div' class='p24_regularTile js_rollover_container ' idx='1'/&gt;&lt;webctrl tag='a'/&gt;&lt;webctrl tag='span' class='p24_content' idx='1'/&gt;&lt;webctrl tag='span' idx='2'/&gt;&lt;webctrl tag='span' class='p24_price' idx='1'/&gt;&lt;/column&gt;&lt;column exact='1' name='Bedrooms' attr='text'&gt;&lt;webctrl tag='div' class='p24_theme' idx='1'/&gt;&lt;webctrl tag='div' class='p24_results' idx='1'/&gt;&lt;webctrl tag='div' class='container' idx='1'/&gt;&lt;webctrl tag='div' class='row' idx='1'/&gt;&lt;webctrl tag='div' class='col-xs-9' idx='1'/&gt;&lt;webctrl tag='div' class='js_listingResultsContainer' idx='1'/&gt;&lt;webctrl tag='div'/&gt;&lt;webctrl tag='div' class='p24_regularTile js_rollover_container ' idx='1'/&gt;&lt;webctrl tag='a'/&gt;&lt;webctrl tag='span' class='p24_content' idx='1'/&gt;&lt;webctrl tag='span' class='p24_icons' idx='1'/&gt;&lt;webctrl tag='span' class='p24_featureDetails' idx='1'/&gt;&lt;webctrl tag='span' idx='1'/&gt;&lt;/column&gt;&lt;column exact='1' name='Bathrooms' attr='text'&gt;&lt;webctrl tag='div' class='p24_theme' idx='1'/&gt;&lt;webctrl tag='div' class='p24_results' idx='1'/&gt;&lt;webctrl tag='div' class='container' idx='1'/&gt;&lt;webctrl tag='div' class='row' idx='1'/&gt;&lt;webctrl tag='div' class='col-xs-9' idx='1'/&gt;&lt;webctrl tag='div' class='js_listingResultsContainer' idx='1'/&gt;&lt;webctrl tag='div'/&gt;&lt;webctrl tag='div' class='p24_regularTile js_rollover_container ' idx='1'/&gt;&lt;webctrl tag='a'/&gt;&lt;webctrl tag='span' class='p24_content' idx='1'/&gt;&lt;webctrl tag='span' class='p24_icons' idx='1'/&gt;&lt;webctrl tag='span' class='p24_featureDetails' idx='2'/&gt;&lt;webctrl tag='span' idx='1'/&gt;&lt;/column&gt;&lt;column exact='1' name='Floor Size' attr='text'&gt;&lt;webctrl tag='div' class='p24_theme' idx='1'/&gt;&lt;webctrl tag='div' class='p24_results' idx='1'/&gt;&lt;webctrl tag='div' class='container' idx='1'/&gt;&lt;webctrl tag='div' class='row' idx='1'/&gt;&lt;webctrl tag='div' class='col-xs-9' idx='1'/&gt;&lt;webctrl tag='div' class='js_listingResultsContainer' idx='1'/&gt;&lt;webctrl tag='div'/&gt;&lt;webctrl tag='div' class='p24_regularTile js_rollover_container ' idx='1'/&gt;&lt;webctrl tag='a'/&gt;&lt;webctrl tag='span' class='p24_content' idx='1'/&gt;&lt;webctrl tag='span' class='p24_icons' idx='1'/&gt;&lt;webctrl tag='span' class='p24_size' idx='1'/&gt;&lt;webctrl tag='span' idx='1'/&gt;&lt;/column&gt;&lt;column exact='1' name='Location' attr='text'&gt;&lt;webctrl tag='div' class='p24_theme' idx='1'/&gt;&lt;webctrl tag='div' class='p24_results' idx='1'/&gt;&lt;webctrl tag='div' class='container' idx='1'/&gt;&lt;webctrl tag='div' class='row' idx='1'/&gt;&lt;webctrl tag='div' class='col-xs-9' idx='1'/&gt;&lt;webctrl tag='div' class='js_listingResultsContainer' idx='1'/&gt;&lt;webctrl tag='div'/&gt;&lt;webctrl tag='div' class='p24_regularTile js_rollover_container ' idx='1'/&gt;&lt;webctrl tag='a'/&gt;&lt;webctrl tag='span' class='p24_content' idx='1'/&gt;&lt;webctrl tag='span' idx='2'/&gt;&lt;webctrl tag='span' class='p24_location ' idx='1'/&gt;&lt;/column&gt;&lt;/extract&gt;" sap:VirtualizedContainerService.HintSize="434,68" sap2010:WorkflowViewState.IdRef="ExtractData_2" MaxNumberOfResults="100" SimulateClick="False">
+              <ui:ExtractData.Target>
+                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Selector="&lt;webctrl tag='BODY' /&gt;" WaitForReady="COMPLETE">
+                  <ui:Target.TimeoutMS>
+                    <InArgument x:TypeArguments="x:Int32" />
+                  </ui:Target.TimeoutMS>
+                </ui:Target>
+              </ui:ExtractData.Target>
+            </ui:ExtractData>
+            <ui:SortDataTable ColumnIndex="{x:Null}" DataColumn="{x:Null}" ColumnName="Price" DataTable="[ExtractDataTable]" DisplayName="Sort Data By Price" sap:VirtualizedContainerService.HintSize="434,22" sap2010:WorkflowViewState.IdRef="SortDataTable_1" Order="Ascending" OutputDataTable="[sortedDataTable]" SortOrder="Ascending" />
+            <ui:BuildDataTable DataTable="[builtDataTable]" DisplayName="Build Data Table" sap:VirtualizedContainerService.HintSize="434,59" sap2010:WorkflowViewState.IdRef="BuildDataTable_1" TableInfo="&lt;NewDataSet&gt;&#xD;&#xA;  &lt;xs:schema id=&quot;NewDataSet&quot; xmlns=&quot;&quot; xmlns:xs=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:msdata=&quot;urn:schemas-microsoft-com:xml-msdata&quot;&gt;&#xD;&#xA;    &lt;xs:element name=&quot;NewDataSet&quot; msdata:IsDataSet=&quot;true&quot; msdata:MainDataTable=&quot;TableName&quot; msdata:UseCurrentLocale=&quot;true&quot;&gt;&#xD;&#xA;      &lt;xs:complexType&gt;&#xD;&#xA;        &lt;xs:choice minOccurs=&quot;0&quot; maxOccurs=&quot;unbounded&quot;&gt;&#xD;&#xA;          &lt;xs:element name=&quot;TableName&quot;&gt;&#xD;&#xA;            &lt;xs:complexType&gt;&#xD;&#xA;              &lt;xs:sequence&gt;&#xD;&#xA;                &lt;xs:element name=&quot;Pricing&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xD;&#xA;                &lt;xs:element name=&quot;Bedrooms&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xD;&#xA;                &lt;xs:element name=&quot;Bathrooms&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xD;&#xA;                &lt;xs:element name=&quot;Floor_x0020_Size&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xD;&#xA;                &lt;xs:element name=&quot;Location&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xD;&#xA;              &lt;/xs:sequence&gt;&#xD;&#xA;            &lt;/xs:complexType&gt;&#xD;&#xA;          &lt;/xs:element&gt;&#xD;&#xA;        &lt;/xs:choice&gt;&#xD;&#xA;      &lt;/xs:complexType&gt;&#xD;&#xA;    &lt;/xs:element&gt;&#xD;&#xA;  &lt;/xs:schema&gt;&#xD;&#xA;&lt;/NewDataSet&gt;" />
+            <ui:ForEachRow CurrentIndex="{x:Null}" DataTable="[sortedDataTable]" DisplayName="For Each Row" sap:VirtualizedContainerService.HintSize="434,783" sap2010:WorkflowViewState.IdRef="ForEachRow_1">
+              <ui:ForEachRow.Body>
+                <ActivityAction x:TypeArguments="sd:DataRow">
+                  <ActivityAction.Argument>
+                    <DelegateInArgument x:TypeArguments="sd:DataRow" Name="row" />
+                  </ActivityAction.Argument>
+                  <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="376,634" sap2010:WorkflowViewState.IdRef="Sequence_4">
+                    <Sequence.Variables>
+                      <Variable x:TypeArguments="x:String" Name="varPrice" />
+                      <Variable x:TypeArguments="x:String" Name="varBedrooms" />
+                      <Variable x:TypeArguments="x:String" Name="varBathrooms" />
+                      <Variable x:TypeArguments="x:String" Name="varFloorSize" />
+                      <Variable x:TypeArguments="x:String" Name="varLocation" />
+                    </Sequence.Variables>
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <ui:GetRowItem Column="{x:Null}" ColumnIndex="{x:Null}" ColumnName="Price" DisplayName="Get Price" sap:VirtualizedContainerService.HintSize="334,64" sap2010:WorkflowViewState.IdRef="GetRowItem_1" Row="[row]">
+                      <ui:GetRowItem.Value>
+                        <OutArgument x:TypeArguments="x:String">[varPrice]</OutArgument>
+                      </ui:GetRowItem.Value>
+                    </ui:GetRowItem>
+                    <ui:GetRowItem Column="{x:Null}" ColumnIndex="{x:Null}" ColumnName="Bedrooms" DisplayName="Get Bedrooms" sap:VirtualizedContainerService.HintSize="334,64" sap2010:WorkflowViewState.IdRef="GetRowItem_2" Row="[row]">
+                      <ui:GetRowItem.Value>
+                        <OutArgument x:TypeArguments="x:String">[varBedrooms]</OutArgument>
+                      </ui:GetRowItem.Value>
+                    </ui:GetRowItem>
+                    <ui:GetRowItem Column="{x:Null}" ColumnIndex="{x:Null}" ColumnName="Bathrooms" DisplayName="Get Bathrooms" sap:VirtualizedContainerService.HintSize="334,64" sap2010:WorkflowViewState.IdRef="GetRowItem_3" Row="[row]">
+                      <ui:GetRowItem.Value>
+                        <OutArgument x:TypeArguments="x:String">[varBathrooms]</OutArgument>
+                      </ui:GetRowItem.Value>
+                    </ui:GetRowItem>
+                    <ui:GetRowItem Column="{x:Null}" ColumnIndex="{x:Null}" ColumnName="Floor Size" DisplayName="Get Floor Size" sap:VirtualizedContainerService.HintSize="334,64" sap2010:WorkflowViewState.IdRef="GetRowItem_4" Row="[row]">
+                      <ui:GetRowItem.Value>
+                        <OutArgument x:TypeArguments="x:String">[varFloorSize]</OutArgument>
+                      </ui:GetRowItem.Value>
+                    </ui:GetRowItem>
+                    <ui:GetRowItem Column="{x:Null}" ColumnIndex="{x:Null}" ColumnName="Location" DisplayName="Get Location" sap:VirtualizedContainerService.HintSize="334,64" sap2010:WorkflowViewState.IdRef="GetRowItem_5" Row="[row]">
+                      <ui:GetRowItem.Value>
+                        <OutArgument x:TypeArguments="x:String">[varLocation]</OutArgument>
+                      </ui:GetRowItem.Value>
+                    </ui:GetRowItem>
+                    <ui:AddDataRow DataRow="{x:Null}" ArrayRow="[{varPrice,varBedrooms,varBathrooms,varFloorSize,varLocation}]" DataTable="[builtDataTable]" DisplayName="Add Data Row" sap:VirtualizedContainerService.HintSize="334,22" sap2010:WorkflowViewState.IdRef="AddDataRow_1" />
+                  </Sequence>
+                </ActivityAction>
+              </ui:ForEachRow.Body>
+            </ui:ForEachRow>
+            <ui:ExcelApplicationScope Password="{x:Null}" DisplayName="Excel Application Scope" sap:VirtualizedContainerService.HintSize="434,328" sap2010:WorkflowViewState.IdRef="ExcelApplicationScope_1" Visible="False" WorkbookPath="realestatedata.xlsx">
+              <ui:ExcelApplicationScope.Body>
+                <ActivityAction x:TypeArguments="ui:WorkbookApplication">
+                  <ActivityAction.Argument>
+                    <DelegateInArgument x:TypeArguments="ui:WorkbookApplication" Name="ExcelWorkbookScope" />
+                  </ActivityAction.Argument>
+                  <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="376,179" sap2010:WorkflowViewState.IdRef="Sequence_5">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <ui:ExcelWriteRange AddHeaders="False" DataTable="[builtDataTable]" DisplayName="Write Range" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="ExcelWriteRange_1" SheetName="Sheet1" StartingCell="A1" />
+                  </Sequence>
+                </ActivityAction>
+              </ui:ExcelApplicationScope.Body>
+            </ui:ExcelApplicationScope>
           </Sequence>
         </ActivityAction>
       </ui:OpenBrowser.Body>
     </ui:OpenBrowser>
-    <ui:ExtractData DelayBetweenPagesMS="{x:Null}" NextLinkSelector="{x:Null}" ContinueOnError="True" DataTable="[ExtractDataTable]" DisplayName="Extract Real Estate Listings" ExtractMetadata="&lt;extract&gt;&lt;row exact='1'&gt;&lt;webctrl tag='div' class='p24_theme' idx='1'/&gt;&lt;webctrl tag='div' class='p24_results' idx='1'/&gt;&lt;webctrl tag='div' class='container' idx='1'/&gt;&lt;webctrl tag='div' class='row' idx='1'/&gt;&lt;webctrl tag='div' class='col-xs-9' idx='1'/&gt;&lt;webctrl tag='div' class='js_listingResultsContainer' idx='1'/&gt;&lt;webctrl tag='div'/&gt;&lt;webctrl tag='div' class='p24_regularTile js_rollover_container ' idx='1'/&gt;&lt;webctrl tag='a'/&gt;&lt;webctrl tag='span' class='p24_content' idx='1'/&gt;&lt;/row&gt;&lt;column exact='1' name='Price' attr='text'&gt;&lt;webctrl tag='div' class='p24_theme' idx='1'/&gt;&lt;webctrl tag='div' class='p24_results' idx='1'/&gt;&lt;webctrl tag='div' class='container' idx='1'/&gt;&lt;webctrl tag='div' class='row' idx='1'/&gt;&lt;webctrl tag='div' class='col-xs-9' idx='1'/&gt;&lt;webctrl tag='div' class='js_listingResultsContainer' idx='1'/&gt;&lt;webctrl tag='div'/&gt;&lt;webctrl tag='div' class='p24_regularTile js_rollover_container ' idx='1'/&gt;&lt;webctrl tag='a'/&gt;&lt;webctrl tag='span' class='p24_content' idx='1'/&gt;&lt;webctrl tag='span' idx='2'/&gt;&lt;webctrl tag='span' class='p24_price' idx='1'/&gt;&lt;/column&gt;&lt;column exact='1' name='Bedrooms' attr='text'&gt;&lt;webctrl tag='div' class='p24_theme' idx='1'/&gt;&lt;webctrl tag='div' class='p24_results' idx='1'/&gt;&lt;webctrl tag='div' class='container' idx='1'/&gt;&lt;webctrl tag='div' class='row' idx='1'/&gt;&lt;webctrl tag='div' class='col-xs-9' idx='1'/&gt;&lt;webctrl tag='div' class='js_listingResultsContainer' idx='1'/&gt;&lt;webctrl tag='div'/&gt;&lt;webctrl tag='div' class='p24_regularTile js_rollover_container ' idx='1'/&gt;&lt;webctrl tag='a'/&gt;&lt;webctrl tag='span' class='p24_content' idx='1'/&gt;&lt;webctrl tag='span' class='p24_icons' idx='1'/&gt;&lt;webctrl tag='span' class='p24_featureDetails' idx='1'/&gt;&lt;webctrl tag='span' idx='1'/&gt;&lt;/column&gt;&lt;column exact='1' name='Bathrooms' attr='text'&gt;&lt;webctrl tag='div' class='p24_theme' idx='1'/&gt;&lt;webctrl tag='div' class='p24_results' idx='1'/&gt;&lt;webctrl tag='div' class='container' idx='1'/&gt;&lt;webctrl tag='div' class='row' idx='1'/&gt;&lt;webctrl tag='div' class='col-xs-9' idx='1'/&gt;&lt;webctrl tag='div' class='js_listingResultsContainer' idx='1'/&gt;&lt;webctrl tag='div'/&gt;&lt;webctrl tag='div' class='p24_regularTile js_rollover_container ' idx='1'/&gt;&lt;webctrl tag='a'/&gt;&lt;webctrl tag='span' class='p24_content' idx='1'/&gt;&lt;webctrl tag='span' class='p24_icons' idx='1'/&gt;&lt;webctrl tag='span' class='p24_featureDetails' idx='2'/&gt;&lt;webctrl tag='span' idx='1'/&gt;&lt;/column&gt;&lt;column exact='1' name='Floor Size' attr='text'&gt;&lt;webctrl tag='div' class='p24_theme' idx='1'/&gt;&lt;webctrl tag='div' class='p24_results' idx='1'/&gt;&lt;webctrl tag='div' class='container' idx='1'/&gt;&lt;webctrl tag='div' class='row' idx='1'/&gt;&lt;webctrl tag='div' class='col-xs-9' idx='1'/&gt;&lt;webctrl tag='div' class='js_listingResultsContainer' idx='1'/&gt;&lt;webctrl tag='div'/&gt;&lt;webctrl tag='div' class='p24_regularTile js_rollover_container ' idx='1'/&gt;&lt;webctrl tag='a'/&gt;&lt;webctrl tag='span' class='p24_content' idx='1'/&gt;&lt;webctrl tag='span' class='p24_icons' idx='1'/&gt;&lt;webctrl tag='span' class='p24_size' idx='1'/&gt;&lt;webctrl tag='span' idx='1'/&gt;&lt;/column&gt;&lt;column exact='1' name='Location' attr='text'&gt;&lt;webctrl tag='div' class='p24_theme' idx='1'/&gt;&lt;webctrl tag='div' class='p24_results' idx='1'/&gt;&lt;webctrl tag='div' class='container' idx='1'/&gt;&lt;webctrl tag='div' class='row' idx='1'/&gt;&lt;webctrl tag='div' class='col-xs-9' idx='1'/&gt;&lt;webctrl tag='div' class='js_listingResultsContainer' idx='1'/&gt;&lt;webctrl tag='div'/&gt;&lt;webctrl tag='div' class='p24_regularTile js_rollover_container ' idx='1'/&gt;&lt;webctrl tag='a'/&gt;&lt;webctrl tag='span' class='p24_content' idx='1'/&gt;&lt;webctrl tag='span' idx='2'/&gt;&lt;webctrl tag='span' class='p24_location ' idx='1'/&gt;&lt;/column&gt;&lt;/extract&gt;" sap:VirtualizedContainerService.HintSize="434,68" sap2010:WorkflowViewState.IdRef="ExtractData_2" MaxNumberOfResults="100" SimulateClick="True">
-      <ui:ExtractData.Target>
-        <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Selector="&lt;webctrl tag='BODY' /&gt;" WaitForReady="COMPLETE">
-          <ui:Target.TimeoutMS>
-            <InArgument x:TypeArguments="x:Int32" />
-          </ui:Target.TimeoutMS>
-        </ui:Target>
-      </ui:ExtractData.Target>
-    </ui:ExtractData>
-    <ui:SortDataTable ColumnIndex="{x:Null}" DataColumn="{x:Null}" ColumnName="Price" DataTable="[ExtractDataTable]" DisplayName="Sort Data By Price" sap:VirtualizedContainerService.HintSize="434,22" sap2010:WorkflowViewState.IdRef="SortDataTable_1" Order="Ascending" OutputDataTable="[sortedDataTable]" SortOrder="Ascending" />
-    <ui:Comment sap:VirtualizedContainerService.HintSize="434,75" sap2010:WorkflowViewState.IdRef="Comment_1" Text="Issues with extracting data from appropriate column. Come back later. " />
   </Sequence>
 </Activity>
